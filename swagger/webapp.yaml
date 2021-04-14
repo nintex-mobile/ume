@@ -35,6 +35,19 @@ paths:
         "500":
           description: "server error"
 
+  /webapp/latest/download:
+    get:
+      tags:
+      - "webapp"
+      summary: "Download the latest version of the webapp"
+      description: "Returns the latest version of the webapp"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+        "500":
+          description: "server error"
 
 definitions:
   WebApp:
