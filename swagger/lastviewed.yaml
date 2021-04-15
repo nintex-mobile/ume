@@ -1,0 +1,49 @@
+swagger: "2.0"
+info:
+  description: "This documentation shows the available endpoints supported for Mobile to submit the favourite."
+  version: "1.0.0"
+  title: "Promapp Mobile: Submit favourite"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "apiteam@swagger.io"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "promapp.nintex.com"
+basePath: "/mobile-promapp/api/v1/"
+tags:
+- name: "favourites"
+  description: "Everything about the favourites"
+
+schemes:
+- "https"
+
+paths:
+  /webapp/favourites:
+    post:
+      tags:
+      - "favourites"
+      summary: "submit the favourite item to the server"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+              $ref: "#/definitions/Favourite"
+        "500":
+          description: "server error" 
+
+definitions:
+  Favourite:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+        example: "0ce05421-2f9c-4f0b-b4c3-e96425e8562c"
+      isFavourite:
+        type: "boolean"
+        example: true 
+  
+        
+        

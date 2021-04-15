@@ -1,14 +1,8 @@
 swagger: "2.0"
 info:
-  description: "This documentation shows the available endpoints supported for Mobile to download the processes."
+  description: "This documentation shows the available endpoints  for Mobile to handle the processes."
   version: "1.0.0"
-  title: "Promapp Mobile: Download processes"
-  termsOfService: "http://swagger.io/terms/"
-  contact:
-    email: "apiteam@swagger.io"
-  license:
-    name: "Apache 2.0"
-    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+  title: "Promapp Mobile: Processes"
 host: "promapp.nintex.com"
 basePath: "/mobile-promapp/api/v1/"
 tags:
@@ -23,8 +17,7 @@ paths:
     get:
       tags:
       - "processes"
-      summary: "Get a collection of processes which are new, modified and deleted"
-      description: "Returns a payload of processes"
+      summary: "Get a collection of processes and process groups which are new, modified or deleted"
       produces:
       - "application/json"
       responses:
@@ -41,8 +34,7 @@ paths:
     get:
       tags:
       - "processes"
-      summary: "Get a process group or process"
-      description: "Returns a process group or process"
+      summary: "Get a process group or process definition"
       produces:
       - "application/json"
       parameters:
@@ -58,6 +50,48 @@ paths:
               $ref: "#/definitions/Process"
         "500":
           description: "server error"
+          
+  /webapp/processes/{id}/lastviewed:
+    post:
+      tags:
+      - "processes"
+      summary: "submit the last viewed process"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The id of the process"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+              $ref: "#/definitions/LastViewed"
+        "500":
+          description: "server error"
+          
+  /webapp/processes/{id}/favourite:
+    post:
+      tags:
+      - "processes"
+      summary: "submit the favourite of a process"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The id of the process"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+              $ref: "#/definitions/Favourite"
+        "500":
+          description: "server error"        
 
 
 definitions:
@@ -125,4 +159,17 @@ definitions:
         description: "The depth of this item in the hierarchical tree"
         default: 0
         
+  LastViewed:
+    type: "object"
+    properties:
+      lastViewedDate:
+        type: "string"
+        format: "date-time"
+        description: "date in UTC"
         
+  Favourite:
+    type: "object"
+    properties:
+      isFavourite:
+        type: "boolean"
+
