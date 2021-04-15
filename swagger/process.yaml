@@ -1,0 +1,128 @@
+swagger: "2.0"
+info:
+  description: "This documentation shows the available endpoints supported for Mobile to download the processes."
+  version: "1.0.0"
+  title: "Promapp Mobile: Download processes"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "apiteam@swagger.io"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "promapp.nintex.com"
+basePath: "/mobile-promapp/api/v1/"
+tags:
+- name: "processes"
+  description: "Everything about the processes"
+
+schemes:
+- "https"
+
+paths:
+  /webapp/processes:
+    get:
+      tags:
+      - "processes"
+      summary: "Get a collection of processes which are new, modified and deleted"
+      description: "Returns a payload of processes"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Processes"
+        "500":
+          description: "server error"
+  
+  /webapp/processes/{id}:
+    get:
+      tags:
+      - "processes"
+      summary: "Get a process group or process"
+      description: "Returns a process group or process"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "The id of the item"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+              $ref: "#/definitions/Process"
+        "500":
+          description: "server error"
+
+
+definitions:
+  Processes:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+        example: "0ce05421-2f9c-4f0b-b4c3-e96425e8562c"
+      type:
+        type: "integer"
+        format: "int16"
+        description: "ProcessGroup (1) Process (2)"
+        enum:
+        - 1
+        - 2
+      state:
+        type: "integer"
+        format: "int16"
+        description: "New (1) Modified (2) Deleted (3)"
+        enum:
+        - 1
+        - 2
+        - 3
+  
+  Process:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+        example: "0ce05421-2f9c-4f0b-b4c3-e96425e8562c"
+      name:  
+        type: "string"
+        example: "Expense claim"
+      path:
+        type: "string"
+        description: "path showing the location of the process"
+        example: "Human resources"
+      lastViewedDate:
+        type: "string"
+        format: "date-time"
+        description: "date in UTC"
+        example: "2019-11-14T09:13:33.759+00:00"
+      isFavourite:
+        type: "boolean"
+        example: false 
+      type:
+        type: "integer"
+        format: "int16"
+        description: "ProcessGroup (1) Process (2)"
+        enum:
+        - 1
+        - 2
+      state:
+        type: "integer"
+        format: "int16"
+        description: "New (1) Modified (2) Deleted (3)"
+        enum:
+        - 1
+        - 2
+        - 3
+      level:
+        type: "integer"
+        format: "int16"
+        description: "The depth of this item in the hierarchical tree"
+        default: 0
+        
+        
