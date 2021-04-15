@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  description: "This documentation shows the available endpoints  for Mobile to download the webapp package."
+  description: "This documentation shows the available endpoints for Mobile to download the webapp package."
   version: "1.0.0"
   title: "Promapp Mobile: WebApp package"
 host: "promapp.nintex.com"
