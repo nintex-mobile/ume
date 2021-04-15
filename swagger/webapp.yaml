@@ -1,19 +1,13 @@
 swagger: "2.0"
 info:
-  description: "This documentation shows the available endpoints supported for Mobile to download the webapp package."
+  description: "This documentation shows the available endpoints  for Mobile to download the webapp package."
   version: "1.0.0"
-  title: "Promapp Mobile: Download webapp package"
-  termsOfService: "http://swagger.io/terms/"
-  contact:
-    email: "apiteam@swagger.io"
-  license:
-    name: "Apache 2.0"
-    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+  title: "Promapp Mobile: WebApp package"
 host: "promapp.nintex.com"
 basePath: "/mobile-promapp/api/v1/"
 tags:
 - name: "webapp"
-  description: "Everything about webapp"
+  description: "Everything about the webapp"
 
 schemes:
 - "https"
@@ -24,7 +18,6 @@ paths:
       tags:
       - "webapp"
       summary: "Get the latest version of the webapp"
-      description: "Returns a version"
       produces:
       - "application/json"
       responses:
@@ -40,7 +33,6 @@ paths:
       tags:
       - "webapp"
       summary: "Download the latest version of the webapp"
-      description: "Returns the latest version of the webapp"
       produces:
       - "application/octet-stream"
       responses:
@@ -54,7 +46,6 @@ paths:
       tags:
       - "webapp"
       summary: "Download the specified version of the webapp"
-      description: "Returns the specified version of the webapp"
       produces:
       - "application/octet-stream"
       parameters:
@@ -76,3 +67,4 @@ definitions:
       version:
         type: "string"
         example: "23.1"
+        
