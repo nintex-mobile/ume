@@ -12,19 +12,26 @@ schemes:
   - https
 paths:
   /webapp/processes:
-    get:
+    post:
       tags:
         - processes
       summary: 'Get a collection of processes and process groups which are new, modified or deleted'
       produces:
         - application/json
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Posting minimode processes to the server to check for any new updates"
+        required: true
+        schema:
+            type: array
+            items:
+              $ref: "#/definitions/MiniModeProcess"
       responses:
         '200':
           description: successful operation
           schema:
-            type: array
-            items:
-              $ref: '#/definitions/Processes'
+            $ref: '#/definitions/Processes'
         '500':
           description: server error
   '/webapp/processes/{id}':
@@ -79,41 +86,39 @@ paths:
               $ref: '#/definitions/Favourite'
         '500':
           description: server error
+          
+      
 definitions:
-  Processes:
+
+  MiniModeProcess:
     type: object
     properties:
       id:
         type: string
-        example: 0ce05421-2f9c-4f0b-b4c3-e96425e8562c
-      isFavourite:
+        example: 0ce05421-2f9c-4f0b-b4c3-e96425e8562c   
+        
+  Processes:
+    type: object
+    properties:
+      processes:
+        type: "array"
+        items:
+          $ref: "#/definitions/DeltaProcess"
+      settings:
+          $ref: '#/definitions/Settings'
+  
+  Settings:
+    type: object
+    properties:
+      minimodeEnabled:
         type: boolean
-      lastViewed:
-        type: string
-        format: date-time
-        description: date in UTC
-        example: '2019-11-14T09:13:33.759+00:00'
-      type:
-        type: integer
-        format: int16
-        description: ProcessGroup (1) Process (2)
-        enum:
-          - 1
-          - 2
-      state:
-        type: integer
-        format: int16
-        description: New (1) Modified (2) Deleted (3)
-        enum:
-          - 1
-          - 2
-          - 3
-      title:
-        type: string
-        example: "Expense Claim"
-      subtitle:
-        type: string
-        example: "Human Resources"
+      minimodeUnauthLeaveFeedback:
+        type: boolean
+      minimodeEnabledViewProcesses:
+        type: boolean
+      minimodeRequiredLogin:
+        type: boolean
+      
   Process:
     type: object
     properties:
@@ -155,6 +160,42 @@ definitions:
         type: array
         items:
               $ref: '#/definitions/Metadata'
+              
+  DeltaProcess:
+    type: object
+    properties:
+      id:
+        type: string
+        example: 0ce05421-2f9c-4f0b-b4c3-e96425e8562c
+      isFavourite:
+        type: boolean
+      lastViewed:
+        type: string
+        format: date-time
+        description: date in UTC
+        example: '2019-11-14T09:13:33.759+00:00'
+      type:
+        type: integer
+        format: int16
+        description: ProcessGroup (1) Process (2)
+        enum:
+          - 1
+          - 2
+      state:
+        type: integer
+        format: int16
+        description: New (1) Modified (2) Deleted (3)
+        enum:
+          - 1
+          - 2
+          - 3
+      title:
+        type: string
+        example: "Expense Claim"
+      subtitle:
+        type: string
+        example: "Human Resources" 
+      
   Metadata:
     type: object
     properties:
