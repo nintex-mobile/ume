@@ -47,7 +47,7 @@ paths:
             $ref: '#/definitions/Process'
         '500':
           description: server error
-  '/webapp/processes/lastviewed':
+  /webapp/processes/lastviewed:
     post:
       tags:
         - processes
@@ -63,7 +63,7 @@ paths:
               $ref: '#/definitions/LastViewed'
         '500':
           description: server error
-  '/webapp/processes/favourites':
+  /webapp/processes/favourites:
     post:
       tags:
         - processes
@@ -86,6 +86,13 @@ definitions:
       id:
         type: string
         example: 0ce05421-2f9c-4f0b-b4c3-e96425e8562c
+      isFavourite:
+        type: boolean
+      lastViewed:
+        type: string
+        format: date-time
+        description: date in UTC
+        example: '2019-11-14T09:13:33.759+00:00'
       type:
         type: integer
         format: int16
@@ -101,27 +108,25 @@ definitions:
           - 1
           - 2
           - 3
+      title:
+        type: string
+        example: "Expense Claim"
+      subtitle:
+        type: string
+        example: "Human Resources"
   Process:
     type: object
     properties:
       id:
         type: string
         example: 0ce05421-2f9c-4f0b-b4c3-e96425e8562c
-      name:
-        type: string
-        example: Expense claim
-      path:
-        type: string
-        description: path showing the location of the process
-        example: Human resources
-      lastViewedDate:
+      isFavourite:
+        type: boolean
+      lastViewed:
         type: string
         format: date-time
         description: date in UTC
         example: '2019-11-14T09:13:33.759+00:00'
-      isFavourite:
-        type: boolean
-        example: false
       type:
         type: integer
         format: int16
@@ -137,11 +142,45 @@ definitions:
           - 1
           - 2
           - 3
-      level:
+      title:
+        type: string
+        example: "Expense Claim"
+      subtitle:
+        type: string
+        example: "Human Resources"
+      body:
+        type: string
+        example: "Json Payload"
+      metadata:
+        type: array
+        items:
+              $ref: '#/definitions/Metadata'
+  Metadata:
+    type: object
+    properties:
+      id:
+        type: string
+        example: 0ce05421-2f9c-4f0b-b4c3-e96425e8562c
+      hash:
+        type: string
+        example: 0ce05421-2f9c-4f0b-b4c3-e96425e8562c
+      url:
+        type: string
+        example: http://
+      name:
+        type: string
+        example: abc.pdf
+      size:
+        type: string
+        example: 500b
+      type:
         type: integer
         format: int16
-        description: The depth of this item in the hierarchical tree
-        default: 0
+        description: embedded (1) external (2)
+        enum:
+          - 1
+          - 2
+
   LastViewed:
     type: object
     properties:
