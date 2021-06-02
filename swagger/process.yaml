@@ -54,39 +54,23 @@ paths:
             $ref: '#/definitions/Process'
         '500':
           description: server error
-  /webapp/processes/lastviewed:
-    post:
+    patch:
       tags:
         - processes
-      summary: submit the last viewed process
+      summary: submit the last viewed and favourite process
       produces:
         - application/json
+      parameters:
+        - name: id
+          in: path
+          description: The id of the item
+          required: true
+          type: string
       responses:
         '200':
           description: successful operation
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/LastViewed'
         '500':
           description: server error
-  /webapp/processes/favourites:
-    post:
-      tags:
-        - processes
-      summary: submit the favourite of a process
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: successful operation
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/Favourite'
-        '500':
-          description: server error
-          
       
 definitions:
 
