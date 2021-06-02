@@ -15,7 +15,7 @@ paths:
     post:
       tags:
         - processes
-      summary: 'Get a collection of processes and process groups which are new, modified or deleted'
+      summary: 'Get a collection of processes and process groups which are new, modified or deleted.'
       produces:
         - application/json
       parameters:
