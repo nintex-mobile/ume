@@ -77,9 +77,10 @@ definitions:
   MiniModeProcess:
     type: object
     properties:
-      id:
+      url:
         type: string
-        example: 0ce05421-2f9c-4f0b-b4c3-e96425e8562c   
+        example: https://demo.promapp.com/857f84bd5f39475bac9b1185cf414318/Process/Minimode/Permalink/D6IqhakZdXSjHkv04x6Kei
+ 
         
   Processes:
     type: object
@@ -88,6 +89,14 @@ definitions:
         type: "array"
         items:
           $ref: "#/definitions/DeltaProcess"
+      favourites:
+        type: "array"
+        items:
+          $ref: "#/definitions/DeltaFavourite"
+      recentlyViewed:
+        type: "array"
+        items:
+          $ref: "#/definitions/DeltaRecentlyViewed"
       settings:
           $ref: '#/definitions/Settings'
   
@@ -148,16 +157,14 @@ definitions:
   DeltaProcess:
     type: object
     properties:
+      parentId:
+        type: string
+        example: 0ce05421-2f9c-4f0b-b4c3-e96425e8562c
       id:
         type: string
         example: 0ce05421-2f9c-4f0b-b4c3-e96425e8562c
-      isFavourite:
+      hasChildren:
         type: boolean
-      lastViewed:
-        type: string
-        format: date-time
-        description: date in UTC
-        example: '2019-11-14T09:13:33.759+00:00'
       type:
         type: integer
         format: int16
@@ -179,6 +186,27 @@ definitions:
       subtitle:
         type: string
         example: "Human Resources" 
+  
+  DeltaFavourite:
+    type: object
+    properties:
+      id:
+        type: string
+        example: 0ce05421-2f9c-4f0b-b4c3-e96425e8562c
+      isFavourite:
+        type: boolean
+        
+  DeltaRecentlyViewed:
+    type: object
+    properties:
+      id:
+        type: string
+        example: 0ce05421-2f9c-4f0b-b4c3-e96425e8562c
+      lastViewed:
+        type: string
+        format: date-time
+        description: date in UTC
+        example: '2019-11-14T09:13:33.759+00:00'
       
   Metadata:
     type: object
