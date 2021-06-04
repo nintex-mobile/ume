@@ -97,8 +97,6 @@ definitions:
         type: "array"
         items:
           $ref: "#/definitions/DeltaRecentlyViewed"
-      settings:
-          $ref: '#/definitions/Settings'
   
   Settings:
     type: object
@@ -155,6 +153,19 @@ definitions:
               $ref: '#/definitions/Metadata'
               
   DeltaProcess:
+    type: object
+    properties:
+      tenantId:
+        type: string
+        example: 0ce05421-2f9c-4f0b-b4c3-e96425e8562c
+      processes:
+        type: array
+        items:
+              $ref: '#/definitions/DeltaProcessDetail'
+      settings:
+          $ref: '#/definitions/Settings'
+        
+  DeltaProcessDetail:
     type: object
     properties:
       parentId:
